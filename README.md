@@ -38,3 +38,13 @@ The whole code is based on my view about "clean architecture" and how to build m
 
 ### ./usecase:
 >The software in this layer contains application specific business rules. It encapsulates and implements all of the use cases of the system. These use cases orchestrate the flow of data to and from the entities, and direct those entities to use their enterprise wide business rules to achieve the goals of the use case.
+
+# TODO (yes, you can help me!):
+* Implement infrastructure objects and create adapters for drivers like MySql, using libs for go;
+* Implement some entity/aggregate with domain rules;
+* Define some repository interface in the domain;
+* Implement some VO, for example: Money;
+* Implement entity and repository interation in the use case;
+* And everything you think is cool...
+
+Thank you!
