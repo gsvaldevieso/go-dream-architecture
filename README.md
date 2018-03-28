@@ -1,6 +1,8 @@
 # Go Dream Architecture
 An attempt to build a maintainable architecture in go projects, based on Hexagonal Architecture, The Clean Architecture, Onion Architecture, DDD, etc.
 
+![Gopher](https://media.giphy.com/media/oPu2IgQHwb3Qk/giphy.gif)
+
 This project is based on the current materials:
 
 http://jeffreypalermo.com/blog/the-onion-architecture-part-1/
