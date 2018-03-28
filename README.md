@@ -13,6 +13,8 @@ http://alistair.cockburn.us/Hexagonal+architecture
 
 The whole code is based on my view about "clean architecture" and how to build maintainable projects. This repo is motivated by the absense of good base projects for the golang community and I hope it can be helpful for you as for me.
 
+***HEY, THIS PROJECT IS NOT AN APPLICATION! IT'S JUST AN ARCHITECTURE REFERENCE!***
+
 ## Folder strucuture:
 
 ### ./domain/entity:
