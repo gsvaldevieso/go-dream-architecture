@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
-	"github.com/gsvaldevieso/go-dream-architecture/infrastructure/database"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -13,9 +11,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	_ = database.Connect()
-
 	http.HandleFunc("/", handler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
-
 }
