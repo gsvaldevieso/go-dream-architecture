@@ -6,18 +6,17 @@ import (
 	"github.com/gsvaldevieso/go-dream-architecture/repository"
 )
 
-//Relational stores the database structure
-type Relational struct {
+type relational struct {
 	db *sql.DB
 }
 
-// NewRelational stores the database structure
-func NewRelational(db *sql.DB) *Relational {
-	return &Relational{db: db}
+// NewRelational return relational with database connection
+func NewRelational(db *sql.DB) *relational {
+	return &relational{db: db}
 }
 
 // Exec is execute query
-func (m *Relational) Exec(query string, args ...interface{}) error {
+func (m *relational) Exec(query string, args ...interface{}) error {
 	_, err := m.db.Exec(query, args...)
 	if err != nil {
 		return err
@@ -27,30 +26,28 @@ func (m *Relational) Exec(query string, args ...interface{}) error {
 }
 
 // Query returns results of a Query method.
-func (m *Relational) Query(query string, args ...interface{}) (repository.Row, error) {
+func (m *relational) Query(query string, args ...interface{}) (repository.Row, error) {
 	rows, err := m.db.Query(query, args...)
 	if err != nil {
 		return nil, err
 	}
 
-	row := NewRelationalRow(rows)
+	row := newRelationalRow(rows)
 
 	return row, nil
 }
 
-// RelationalRow stores the rows structure
-type RelationalRow struct {
-	Rows *sql.Rows
+type relationalRow struct {
+	rows *sql.Rows
 }
 
-// Return NewRelational with database rows
-func NewRelationalRow(rows *sql.Rows) RelationalRow {
-	return RelationalRow{Rows: rows}
+func newRelationalRow(rows *sql.Rows) relationalRow {
+	return relationalRow{rows: rows}
 }
 
 // Scan returns results of a Scan method.
-func (r RelationalRow) Scan(dest ...interface{}) error {
-	if err := r.Rows.Scan(dest...); err != nil {
+func (r relationalRow) Scan(dest ...interface{}) error {
+	if err := r.rows.Scan(dest...); err != nil {
 		return err
 	}
 
@@ -58,16 +55,16 @@ func (r RelationalRow) Scan(dest ...interface{}) error {
 }
 
 // Close returns results of a Close method.
-func (r RelationalRow) Close() error {
-	return r.Rows.Close()
+func (r relationalRow) Close() error {
+	return r.rows.Close()
 }
 
 // Next returns results of a Next method.
-func (r RelationalRow) Next() bool {
-	return r.Rows.Next()
+func (r relationalRow) Next() bool {
+	return r.rows.Next()
 }
 
 // Err returns results of a Err method.
-func (r RelationalRow) Err() error {
-	return r.Rows.Err()
+func (r relationalRow) Err() error {
+	return r.rows.Err()
 }

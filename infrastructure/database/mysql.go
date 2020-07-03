@@ -9,13 +9,13 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-// MySQL stores the database structure
-type MySQL struct {
-	db *sql.DB
+// mySQL stores the database structure
+type mySQL struct {
+	DB *sql.DB
 }
 
-// NewMySQL return MySQL with database connection
-func NewMySQL() (*MySQL, error) {
+// NewMySQL return mySQL with database connection
+func NewMySQL() (*mySQL, error) {
 	var ds = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
 		os.Getenv("MYSQL_USER"),
 		os.Getenv("MYSQL_PASSWORD"),
@@ -26,14 +26,14 @@ func NewMySQL() (*MySQL, error) {
 
 	db, err := sql.Open(os.Getenv("MYSQL_DRIVER"), ds)
 	if err != nil {
-		return &MySQL{}, nil
+		return &mySQL{}, nil
 	}
 
 	if err = db.Ping(); err != nil {
 		panic(err)
 	}
 
-	log.Println("Successfully connected to the MySQL database")
+	log.Println("Successfully connected to the mySQL database")
 
-	return &MySQL{db: db}, nil
+	return &mySQL{DB: db}, nil
 }
