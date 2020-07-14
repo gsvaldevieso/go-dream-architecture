@@ -33,7 +33,7 @@ func NewMySQL() (*mySQL, error) {
 		panic(err)
 	}
 
-	log.Println("Successfully connected to the mySQL database")
+	log.Println("Successfully connected to the MySQL database")
 
 	return &mySQL{DB: db}, nil
 }
