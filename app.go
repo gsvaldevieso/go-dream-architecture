@@ -22,25 +22,24 @@ func main() {
 	orderRepo := repository.NewOrderRepo(dbAdapter)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		var response = struct {
-			Status int `json:"status"`
-		}{
-			Status: http.StatusOK,
-		}
-
 		err := orderRepo.Store(entity.Order{ID: "ID"})
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			response.Status = http.StatusInternalServerError
-			_ = json.NewEncoder(w).Encode(response)
+			response{http.StatusInternalServerError}.send(w)
 			return
 		}
-
-		w.WriteHeader(http.StatusOK)
-		_ = json.NewEncoder(w).Encode(response)
+		response{http.StatusCreated}.send(w)
 	})
 
 	//http.HandleFunc("/", handler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+type response struct {
+	Status int `json:"status"`
+}
+
+func (r response) send(w http.ResponseWriter) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(r.Status)
+	json.NewEncoder(w).Encode(r)
 }
