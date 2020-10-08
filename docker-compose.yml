@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+  go-dream-architecture:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    command: fresh
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_USER: "dev"
+      MYSQL_PASSWORD: "dev"
+      MYSQL_DATABASE: "dev"
+    volumes:
+      - ./scripts/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:rw
+    ports:
+      - "3306:3306"
